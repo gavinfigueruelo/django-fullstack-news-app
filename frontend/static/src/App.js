@@ -272,12 +272,10 @@ editarticleAdmin(article, updatedText){
               isLoggedIn={this.state.isLoggedIn}
               handleLogin={this.handleLogin}
             />
-          }></Route>
+        }></Route>
 
         <Route path="/articles" children={
-            <Articles className="articles"
-              articles={this.state.articles}
-            />
+            <Articles className="articles" articles={this.state.articles}/>
         }></Route>
 
         <Route path="/register" children={

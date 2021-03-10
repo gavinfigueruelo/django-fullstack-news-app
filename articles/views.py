@@ -11,8 +11,8 @@ class ArticlesListView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        phase = self.request.query_params.get('phase', 'Published')
-        return models.Article.objects.filter(phase='Published')
+        # phasechoices = self.request.query_params.get('phase', 'PUB')
+        return models.Article.objects.filter(published=True)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -23,7 +23,7 @@ class UserArticlesListView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        phase = self.request.query_params.get('phase', 'Published')
+        phase = self.request.query_params.get('phase', 'PUB')
         user = self.request.user
         return  models.Article.objects.filter(author=user).filter(phase=phase)
 
@@ -38,7 +38,7 @@ class UserArticlesToDoAllView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return  models.Article.objects.filter(author=user)
-        
+
 
 class ArticlesToDoAllView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerialier

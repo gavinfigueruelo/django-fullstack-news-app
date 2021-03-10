@@ -6,4 +6,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj.owner == request.user
+        elif request.method == "DELETE":
+            return False
+
+        return obj.author == request.user and obj.phase == 'Draft'
