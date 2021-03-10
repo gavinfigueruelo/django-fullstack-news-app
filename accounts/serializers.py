@@ -4,11 +4,13 @@ from rest_auth.models import TokenModel
 
 from .models import Profile
 
+User = get_user_model()
+
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
-        model = user
+        model = User
         fields = ('id', 'username', 'email')
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -24,4 +26,4 @@ class TokenSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TokenModel
-        fields = ('key', 'username')
+        fields = ('key', 'username', 'user')

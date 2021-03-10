@@ -21,7 +21,7 @@ class Article(models.Model):
     body = models.TextField(null=True)
     published = models.BooleanField(default=False)
     phasechoices = models.CharField(
-        max_length=3,
+        max_length=9,
         choices=PHASE_CHOICES,
         default=DRAFT, null=True)
 
